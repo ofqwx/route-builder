@@ -34,14 +34,31 @@ function Path({ wayPoints }: TPathProps) {
             return (
               <Fragment key={`${wayPoint.x}${wayPoint.y}`}>
                 <Line wayPoint1={wayPoint} wayPoint2={wayPoints[index + 1]} />
-                <Circle wayPoint={wayPoint} />
-                <Circle wayPoint={wayPoints[index + 1]} />
+                <Circle
+                  currentIndex={index}
+                  lastIndex={wayPoints.length - 1}
+                  wayPoint={wayPoint}
+                />
+                <Circle
+                  currentIndex={index}
+                  lastIndex={wayPoints.length - 1}
+                  wayPoint={wayPoints[index + 1]}
+                />
+                <Text wayPoint={wayPoint} index={index} />
               </Fragment>
             );
           }
 
           return (
-            <Circle key={`${wayPoint.x}${wayPoint.y}`} wayPoint={wayPoint} />
+            <Fragment title={wayPoint.name}>
+              <Circle
+                currentIndex={index}
+                lastIndex={wayPoints.length - 1}
+                key={`${wayPoint.x}${wayPoint.y}`}
+                wayPoint={wayPoint}
+              />
+              <Text wayPoint={wayPoint} index={index} />
+            </Fragment>
           );
         })}
       </Fragment>
@@ -51,14 +68,46 @@ function Path({ wayPoints }: TPathProps) {
   return null;
 }
 
-function Circle({ wayPoint }) {
+function circleColor(currentIndex, lastIndex) {
+  if (currentIndex === 0) {
+    return colors.mapColors.circle.colorFirst;
+  }
+
+  if (currentIndex === lastIndex) {
+    return colors.mapColors.circle.colorLast;
+  }
+
+  return colors.mapColors.circle.backgroundColor;
+}
+
+type TCircleProps = {
+  wayPoint: TWayPoint,
+  currentIndex?: number,
+  lastIndex?: number
+};
+
+function Circle({ wayPoint, currentIndex, lastIndex }: TCircleProps) {
   return (
     <circle
       cx={wayPoint.x}
       cy={wayPoint.y}
-      r="8"
-      fill={colors.mapColors.circle.backgroundColor}
+      r="14"
+      fill={circleColor(currentIndex, lastIndex)}
     />
+  );
+}
+
+function Text({ wayPoint, index }) {
+  return (
+    <text
+      x={wayPoint.x - 4}
+      y={wayPoint.y + 6}
+      fill={colors.textColors.light}
+      style={{ fontSize: "16px", cursor: "default" }}
+    >
+      <title>{wayPoint.name}</title>
+      {index}
+    </text>
   );
 }
 

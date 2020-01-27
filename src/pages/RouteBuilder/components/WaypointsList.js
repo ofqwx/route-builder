@@ -1,18 +1,13 @@
 // @flow
 
 import React from "react";
-import { List, ListItem, Button, Heading } from "../../../atoms";
+import { List, ListItem } from "../../../atoms";
 import { Flex, Box } from "../../../grid";
 import styled from "styled-components";
 import colors from "../../../theme/colors";
-import { useWayPoints } from "../../../hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-
-const Wrapper = styled.div`
-  height: 100vh;
-  background-color: ${colors.dark};
-`;
+import { faBars, faTrash } from "@fortawesome/free-solid-svg-icons";
+import type { TWayPointsState } from "../../../hooks/wayPoints/wayPoints";
 
 const IconButton = styled(FontAwesomeIcon)`
   cursor: pointer;
@@ -20,9 +15,15 @@ const IconButton = styled(FontAwesomeIcon)`
   font-size: 24px;
 `;
 
-export default function WaypointsList() {
-  const [wayPoints, dispatch] = useWayPoints();
+type TWaypointsListProps = {
+  wayPoints: TWayPointsState,
+  dispatch: any => void
+};
 
+export default function WaypointsList({
+  wayPoints,
+  dispatch
+}: TWaypointsListProps) {
   function handleDragStart(e, index) {
     e.dataTransfer.setData("sourceIndex", index);
   }
@@ -49,51 +50,34 @@ export default function WaypointsList() {
   }
 
   return (
-    <Wrapper>
-      <Flex direction="column">
-        <Box>
-          <Heading level={2}>Route Builder</Heading>
-          <hr />
-        </Box>
-
-        <Box scroll flexGrow={1}>
-          <List>
-            {wayPoints.map((wayPoint, index) => (
-              <ListItem
-                key={`${wayPoint.id}`}
-                draggable="true"
-                onDragStart={e => handleDragStart(e, index)}
-                onDragOver={handleDragOver}
-                onDrop={e => handleDrop(e, index)}
-              >
-                <Flex>
-                  <Box>
-                    <IconButton icon={faBars} />
-                  </Box>
-                  <Box flexGrow={1}>{wayPoint.name}</Box>
-                  <Box>
-                    <IconButton
-                      icon={faTimes}
-                      onClick={() =>
-                        dispatch({
-                          type: "removeWayPoint",
-                          id: wayPoint.id
-                        })
-                      }
-                    />
-                  </Box>
-                </Flex>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-
-        <Box alignSelf="center">
-          <Button onClick={() => alert("Aguantiaaaa")}>
-            Download your Route
-          </Button>
-        </Box>
-      </Flex>
-    </Wrapper>
+    <List>
+      {wayPoints.map((wayPoint, index) => (
+        <ListItem
+          key={`${wayPoint.id}`}
+          draggable="true"
+          onDragStart={e => handleDragStart(e, index)}
+          onDragOver={handleDragOver}
+          onDrop={e => handleDrop(e, index)}
+        >
+          <Flex>
+            <Box>
+              <IconButton icon={faBars} />
+            </Box>
+            <Box flexGrow={1}>{wayPoint.name}</Box>
+            <Box>
+              <IconButton
+                icon={faTrash}
+                onClick={() =>
+                  dispatch({
+                    type: "removeWayPoint",
+                    id: wayPoint.id
+                  })
+                }
+              />
+            </Box>
+          </Flex>
+        </ListItem>
+      ))}
+    </List>
   );
 }

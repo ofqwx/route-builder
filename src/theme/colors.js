@@ -22,7 +22,9 @@ const colors = {
       color: "#3c82dd"
     },
     circle: {
-      backgroundColor: "#282828"
+      backgroundColor: "#282828",
+      colorFirst: "#78b62e",
+      colorLast: "red"
     }
   }
 };

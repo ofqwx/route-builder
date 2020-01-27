@@ -5,15 +5,15 @@ import wayPointsContext from "./Provider";
 
 export type TWayPoint = {
   id: string,
-  x: string,
-  y: string
+  name: string,
+  x: number,
+  y: number
 };
 
 export type TWayPointsState = Array<TWayPoint>;
 
 type TAction = {
   type: string,
-  name: string,
   wayPoint?: TWayPoint,
   id?: string,
   sourceIndex?: number,
