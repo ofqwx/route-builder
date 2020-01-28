@@ -50,7 +50,7 @@ function Path({ wayPoints }: TPathProps) {
           }
 
           return (
-            <Fragment title={wayPoint.name}>
+            <Fragment key={`${wayPoint.x}${wayPoint.y}`}>
               <Circle
                 currentIndex={index}
                 lastIndex={wayPoints.length - 1}
