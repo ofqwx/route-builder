@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import { Flex, Box } from "../../../grid";
 import styled from "styled-components";
 import colors from "../../../theme/colors";
-import { useWayPoints } from "../../../hooks";
+import { useWayPoints, useDownloadGpx } from "../../../hooks";
 import WaypointsList from "./WaypointsList";
 import { Heading, Button } from "../../../atoms";
 
@@ -15,13 +15,13 @@ const Wrapper = styled.div`
 
 const EmptyMessage = styled.p`
   color: ${colors.textColors.light};
-  font-family: "Indie Flower", cursive;
   font-size: 16px;
   text-align: center;
 `;
 
 export default function Sidebar() {
   const [wayPoints, dispatch] = useWayPoints();
+  const download = useDownloadGpx();
 
   return (
     <Wrapper>
@@ -38,9 +38,7 @@ export default function Sidebar() {
             </Box>
 
             <Box alignSelf="center">
-              <Button onClick={() => alert("Aguantiaaaa")}>
-                Download your Route
-              </Button>
+              <Button onClick={download}>Download your Route</Button>
             </Box>
           </Fragment>
         ) : (
