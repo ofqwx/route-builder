@@ -21,7 +21,7 @@ export default function Map() {
       type: "addWayPoint",
       wayPoint: {
         id,
-        name: `WayPoint ${wayPoints.length}`,
+        name: `WayPoint ${wayPoints.length + 1}`,
         x,
         y
       }

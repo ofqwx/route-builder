@@ -19,9 +19,10 @@ export default function useDownloadGpx() {
     const link = document.createElement("a");
 
     const date = new Date();
-    const formattedDate = `${date.getDate()}_${date.getMonth()}_${date.getFullYear()}`;
+    const formattedDate = `${date.getDate()}_${date.getMonth() +
+      1}_${date.getFullYear()}`;
 
-    const filename = `Route_${formattedDate}.gpx`;
+    const filename = `Route_Builder_${formattedDate}.gpx`;
     const file = new Blob([gpxTemplate], { type: "text/plain" });
 
     link.setAttribute("href", window.URL.createObjectURL(file));
@@ -32,6 +33,7 @@ export default function useDownloadGpx() {
     );
 
     link.click();
+    link.remove();
   }
 
   return download;

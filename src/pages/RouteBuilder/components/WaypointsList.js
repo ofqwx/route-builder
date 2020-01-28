@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { List, ListItem } from "../../../atoms";
+import { List, ListItem, Heading } from "../../../atoms";
 import { Flex, Box } from "../../../grid";
 import styled from "styled-components";
 import colors from "../../../theme/colors";
@@ -13,6 +13,10 @@ const IconButton = styled(FontAwesomeIcon)`
   cursor: pointer;
   color: ${colors.textColors.darkLight};
   font-size: 24px;
+`;
+
+const Text = styled.span`
+  color: ${props => props.color || colors.textColors.light};
 `;
 
 type TWaypointsListProps = {
@@ -60,6 +64,9 @@ export default function WaypointsList({
           onDrop={e => handleDrop(e, index)}
         >
           <Flex>
+            <Box>
+              <Text color={colors.textColors.darkLight}>{index}</Text>
+            </Box>
             <Box>
               <IconButton icon={faBars} />
             </Box>
