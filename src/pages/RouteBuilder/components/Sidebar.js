@@ -43,7 +43,7 @@ export default function Sidebar() {
           </Fragment>
         ) : (
           <EmptyMessage>
-            To start, just click somewhere in the map.
+            Click on the map where you want to start your journey
           </EmptyMessage>
         )}
       </Flex>
