@@ -37,6 +37,6 @@ type TImageProps = {
   fit?: TBackgroundSize
 };
 
-export default function Image({ alt }: TImageProps) {
-  return <Wrapper role="img" aria-label={alt} />;
+export default function Image({ alt, ...props }: TImageProps) {
+  return <Wrapper role="img" aria-label={alt} {...props} />;
 }
