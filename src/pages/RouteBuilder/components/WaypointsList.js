@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { List, ListItem, Heading } from "../../../atoms";
+import { List, ListItem } from "../../../atoms";
 import { Flex, Box } from "../../../grid";
 import styled from "styled-components";
 import colors from "../../../theme/colors";
@@ -64,7 +64,7 @@ export default function WaypointsList({
           onDrop={e => handleDrop(e, index)}
         >
           <Flex>
-            <Box>
+            <Box flexBasis="16px">
               <Text color={colors.textColors.darkLight}>{index}</Text>
             </Box>
             <Box>

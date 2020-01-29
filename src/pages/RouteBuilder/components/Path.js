@@ -11,7 +11,7 @@ export type TSVGLayerProps = {
 
 export default function SVGLayer({ wayPoints, addWayPoint }: TSVGLayerProps) {
   return (
-    <svg width="100%" height="100%">
+    <svg style={{ width: "100%", height: "100%", position: "fixed" }}>
       <g onClick={addWayPoint}>
         <rect width="100%" height="100%" fill="transparent" />
       </g>
